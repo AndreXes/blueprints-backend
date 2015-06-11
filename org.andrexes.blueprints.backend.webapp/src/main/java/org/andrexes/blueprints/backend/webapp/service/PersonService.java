@@ -29,7 +29,7 @@ public class PersonService {
     }
 
     public Person createPerson(final Person person) {
-        final int id = persons.keySet().stream().max((p1, p2) -> p1.compareTo(p2)).orElse(1) + 1;
+        final int id = persons.keySet().stream().max((p1, p2) -> p1.compareTo(p2)).orElse(0) + 1;
         person.setId(id);
         persons.put(id, person);
         return getPersonById(id);
@@ -48,12 +48,7 @@ public class PersonService {
     }
 
     public void deletePerson(final int id) {
-        if (persons.containsKey(id)) {
-            persons.remove(id);
-
-        } else {
-            new NotFoundException(MessageFormat.format(PERSON_DOES_NOT_EXIST, id));
-        }
-
+        Optional.ofNullable(persons.remove(id)).orElseThrow(
+                () -> new NotFoundException(MessageFormat.format(PERSON_DOES_NOT_EXIST, id)));
     }
 }

@@ -1,12 +1,11 @@
 package org.andrexes.blueprints.backend.webapp.config;
 
+import io.swagger.jaxrs.listing.SwaggerSerializers;
+import io.swagger.jersey.listing.ApiListingResourceJSON;
+
 import org.andrexes.blueprints.backend.webapp.rest.PersonResource;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
-
-import com.wordnik.swagger.jersey.listing.ApiListingResourceJSON;
-import com.wordnik.swagger.jersey.listing.JerseyApiDeclarationProvider;
-import com.wordnik.swagger.jersey.listing.JerseyResourceListingProvider;
 
 public class BackendApplication extends ResourceConfig {
 
@@ -41,8 +40,7 @@ public class BackendApplication extends ResourceConfig {
      */
     private void configureSwagger() {
         register(ApiListingResourceJSON.class);
-        register(JerseyApiDeclarationProvider.class);
-        register(JerseyResourceListingProvider.class);
+        register(SwaggerSerializers.class);
     }
 
 }

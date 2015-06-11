@@ -1,5 +1,11 @@
 package org.andrexes.blueprints.backend.webapp.rest;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -15,14 +21,8 @@ import org.andrexes.blueprints.backend.webapp.model.Person;
 import org.andrexes.blueprints.backend.webapp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
-
+@Api
 @Path("person")
-@Api(value = "person", description = "Resource for manipulating persons.")
 public class PersonResource {
 
     private static final String ID = "ID of the person";
@@ -34,9 +34,10 @@ public class PersonResource {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @ApiOperation("Retrieves all persons.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Persons retrieved successfully.")
+    @ApiOperation(value = "Retrieves all persons.", response = Person.class, responseContainer = "List")
+    @ApiResponses({
+        @ApiResponse(code = 200, message = "Persons retrieved successfully.", response = Person.class,
+                responseContainer = "List")
     })
     public List<Person> getPersons() {
         return personService.getAllPersons();
