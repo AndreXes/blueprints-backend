@@ -21,7 +21,7 @@ import org.andrexes.blueprints.backend.webapp.model.Person;
 import org.andrexes.blueprints.backend.webapp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Api
+@Api("Person Endpoint")
 @Path("person")
 public class PersonResource {
 

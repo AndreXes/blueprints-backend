@@ -109,7 +109,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<swagger.path>&quot;http://localhost:8080/backend/rest/api-docs/&quot;</swagger.path>
+				<swagger.path>&quot;http://localhost:8080/backend/rest/swagger.json&quot;</swagger.path>
 			</properties>
 		</profile>
 	</profiles>
