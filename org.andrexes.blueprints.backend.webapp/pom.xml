@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.andrexes.blueprints.backend</groupId>
+		<artifactId>org.andrexes.blueprints.backend</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../org.andrexes.blueprints.backend</relativePath>
+	</parent>
+	<artifactId>org.andrexes.blueprints.backend.webapp</artifactId>
+	<packaging>war</packaging>
+	<name>REST Web Application</name>
+	<dependencies>
+		<!-- Jersey -->
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-spring3</artifactId>
+			<version>${jersey.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
+			<artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- API -->
+		<dependency>
+			<groupId>com.wordnik</groupId>
+			<artifactId>swagger-jersey2-jaxrs_2.10</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>backend</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>${basedir}/src/main/webapp</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<swagger.path>&quot;http://localhost:8080/backend/rest/api-docs/&quot;</swagger.path>
+			</properties>
+		</profile>
+	</profiles>
+</project>
